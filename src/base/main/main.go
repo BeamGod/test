@@ -7,7 +7,7 @@ import (
 
 func main()  {
 
-	testForLoop()
+	loopSlice()
 
 }
 
@@ -24,8 +24,9 @@ func printTest() {
 
 // 带f的均可进行规格输出
 // Fprintf 可用于输出流
+// 格式化输入输出中的... 的作用 ： 函数有多个不确定参数的去情况下用于参数的传入  还可以作为切片的打散进行传递
 func printCompare(){
-	fmt.Println("Println")
+	fmt.Println(len("Println"))
 	fmt.Printf("printf\n")
 	fmt.Print("print")
 	fmt.Printf("这是一个规格 %s , %s" , "test")
@@ -37,6 +38,7 @@ func printCompare(){
 	fmt.Fprint(os.Stdout , "this is %s \n" , "Fprint")
 	fmt.Fprint(os.Stderr , "this is os.stderr")
 	//fmt.Sprint("111")
+
 }
 
 

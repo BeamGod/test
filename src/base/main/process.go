@@ -7,7 +7,7 @@ import (
 
 // 同一个包内不同函数的相互调用
 // 问题 ： 在同一个包内，main函数调用此函数，用编译器run可以， 但是用命令build， run有问题
-//解决 ： 虽然用编译器可以帮我编译目录下全部文件，但是用命令的时候是不知道哪些文件是需要编译的 。 所以需要 go build main.go process.go  或者直接编译运行该package go run test/src/base/main
+//解决 ： 虽然用编译器可以帮我编译目录下全部文件，但是用命令的时候是不知道哪些文件是需要编译的 。 所以需要 go build main.go process.go  或者直接编译运行该package go run test/src/base/main 或者直接go run *.go
 
 func testProcessControlller()  {
 
@@ -41,18 +41,17 @@ https://blog.csdn.net/u011957758/article/details/81193806 反射
 
 func testSwitch()  {
 
-	var x string
-
+	var x interface{}
+	x = "111"
 	l , ok := interface{}(x).(string)
 	//l , ok := interface{}x.(string)
 	print(l)
 	print(ok)
 
 
-
 	print("\n")
 
-	switch i := interface{}(x).(type) {   //switch i := x  报错 不理解（） todo
+	switch i := (x).(type) {   //switch i := x  报错 不理解（） todo
 	case nil:
 		fmt.Printf(" x 的类型 :%T",i)
 	case int:
@@ -70,7 +69,6 @@ func testSwitch()  {
 
 
 }
-
 
 
 func typeof(v interface{}) interface{} {
