@@ -5,9 +5,29 @@ import (
 	"os"
 )
 
-func main()  {
 
-	loopSlice()
+
+func main()  {
+	//
+	m := 2
+	k := funcOne(m)
+	l := funcOne(4)
+	fmt.Println("-------------------")
+	fmt.Println(k)
+	fmt.Println(l)
+	fmt.Println("-------------------")
+	fmt.Println(k())
+	fmt.Println(k())
+	fmt.Println(l())
+
+	//testPointer()
+
+	//a := []int{0 , 1 , 2 , 4 , 5}
+	//b := a[1]
+	//fmt.Println(a)
+	//fmt.Println(b)
+
+	//funcOne()
 
 }
 
@@ -20,6 +40,8 @@ func printTest() {
 	// go install 失败 ： 原理同上 gopath的配置为 ～/go/src 但是文件是建立在 ～/go/下面  将gopath修改一下为 ～/go 更加合理
 
 	fmt.Println("printTest")
+
+
 }
 
 // 带f的均可进行规格输出
@@ -107,5 +129,26 @@ func testVarType()  {
 }
 
 
+func testFuncAsVar(a string) string{
+	println(a)
+	return a
+}
+
+// 闭包测试
+// 闭包内的函数在打印出来的地址是一样的
+// 函数的传入参数的是一个值copy ， 所以a的地址在同一次赋值，多次调用是一样的，同一个实例作为传入参数，不同次在外部赋值调用，地址不同
+// 其中，如果闭包传给同一个参数 ， 这个参数多次调用 o的地址是一样的 ， 说明o在闭包内外是指向同一个空间
+func funcOne(a int ) func() int{
+	o := 3
+	println(&o)
+
+	return func() int {
+		o++
+		println(&o)
+		println(&a)
+		println(o + a)
+		return o + a + o
+	}
+}
 
 

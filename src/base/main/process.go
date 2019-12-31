@@ -43,6 +43,7 @@ func testSwitch()  {
 
 	var x interface{}
 	x = "111"
+	x = 1
 	l , ok := interface{}(x).(string)
 	//l , ok := interface{}x.(string)
 	print(l)

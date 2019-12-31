@@ -1,6 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+	. "strconv"
+)
+
+
+
+var ttt int
 
 func testForLoop()  {
 
@@ -108,13 +116,62 @@ func loopArray()  {
 }
 
 //for 循环 slice  排序
-func loopSlice() {
-	var str_slice []string
+// int 转string 直接用string（）会失败 ，需要使用Itoa函数 (string() 获取转的是对应的ascll码)
+// 使用切片的时候，切出一部分给另一个切片，他们对应的值的空间是一样的（无论如何，切片本身的地址空间是不变的，即str1_slice 和str2_slice是不变额达），修改其中一个会影响另一个切片
+//在使用append时，如果不超出其容量，则只和上面一样，但是如果使用append的时候，超出切片本身的cap，则切片本身指向地址不变，但是各个参数上指向的地址空间发生了变化，此时，修改一个切片不影响另一个切片
 
-	//str_slice.
+func loopSlice() {
+	a := 97
+	s := string(a)
+	fmt.Println(s)
+	var str_slice []string
+	str1_slice := make([]string , 4 , 5)
+	str1_slice[0] = "10"
+	str1_slice[1] = "11"
+	str1_slice[2] = "12"
+	str1_slice[3] = "13"
+	str2_slice := str1_slice[1:3]
+	//println(&str1_slice)
+	//println(&str2_slice)
+	//println(&str1_slice)
+	fmt.Println(str1_slice)
+	fmt.Println(Itoa(len(str1_slice)))
+	fmt.Println(Itoa(cap(str1_slice)))
+
+	fmt.Println(str2_slice)
+	fmt.Println(Itoa(len(str2_slice)))
+	fmt.Println(Itoa(cap(str2_slice)))
+	println(&str1_slice[1])
+	println(&str2_slice[0])
+	str2_slice = append(str2_slice, "5")
+	println(&str1_slice[1])
+	println(&str2_slice[0])
+	str2_slice = append(str2_slice, "6")
+	println(&str1_slice[1])
+	println(&str2_slice[0])
+	str2_slice = append(str2_slice, "7")
+	println(&str1_slice[1])
+	println(&str2_slice[0])
+	//println(&str1_slice)
+	//str1_slice = append(str1_slice, "7")
+	println(&str1_slice)
+	str2_slice[0] = "9"
+	//str1_slice = append(str1_slice, "5")
+	//str1_slice = append(str1_slice, "5")
+	//str1_slice = append(str1_slice, "5")
+	//str1_slice = append(str1_slice, "5")
 
 	println(str_slice)
 	fmt.Println(str_slice)
+
+	println(str1_slice)
+	fmt.Println(str1_slice)
+	fmt.Println(Itoa(len(str1_slice)))
+	fmt.Println(Itoa(cap(str1_slice)))
+
+	fmt.Println(str2_slice)
+	fmt.Println(Itoa(len(str2_slice)))
+	fmt.Println(Itoa(cap(str2_slice)))
 }
 
 
@@ -124,6 +181,80 @@ func loopSlice() {
 
 // map slice 排序
 
+// map和slice在函数传递的时候是传引用还是值copy
+//map 是传引用
+
+func testSort() {
+
+	map_test := make(map[string]string)
+	map_test["3"] = "1"
+	map_test["1"] = "1"
+	map_test["2"] = "1"
+	map_test["5"] = "1"
+	map_test["0"] = "1"
+	sortMap(map_test)
+
+	fmt.Println(map_test)
+
+
+
+	slice_tmp := make([]string , 4)
+	slice_tmp[0] = "0"
+	slice_tmp[1] = "1"
+
+	fmt.Println("---------------")
+	fmt.Println(&slice_tmp)
+	fmt.Println(slice_tmp)
+	fmt.Println(len(slice_tmp))
+	fmt.Println(cap(slice_tmp))
+	testSliceOne(slice_tmp)
+
+	fmt.Println("---------------")
+	fmt.Println(&slice_tmp)
+	fmt.Println(slice_tmp)
+	fmt.Println(len(slice_tmp))
+	fmt.Println(cap(slice_tmp))
+
+
+}
+
+
+
+
+func sortMap(mp map[string]string) {
+
+	slice_tmp := make([]string , 0)
+	mp["0"] = "10"
+	for key , _ := range mp {
+		slice_tmp = append(slice_tmp, key)
+	}
+	fmt.Println(slice_tmp)
+	sort.Strings(slice_tmp)
+	fmt.Println(slice_tmp)
+
+}
+
+
+func testSliceOne(slice_tmp []string) {
+	fmt.Println("---------------")
+
+	fmt.Println(&slice_tmp)
+	fmt.Println(slice_tmp)
+	fmt.Println(len(slice_tmp))
+	fmt.Println(cap(slice_tmp))
+	slice_tmp[2] = "2"
+	slice_tmp[3] = "3"
+	slice_tmp = append(slice_tmp, "1")
+	slice_tmp = append(slice_tmp, "2")
+	slice_tmp = append(slice_tmp, "3")
+	slice_tmp = append(slice_tmp, "4")
+	fmt.Println("---------------")
+	fmt.Println(&slice_tmp)
+	fmt.Println(slice_tmp)
+	fmt.Println(len(slice_tmp))
+	fmt.Println(cap(slice_tmp))
+
+}
 
 
 // range 在数组 切片 int中的运用
