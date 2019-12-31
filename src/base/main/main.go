@@ -79,7 +79,7 @@ func testVarType()  {
 	a = 127
 	b = 2
 	b++
-	c := a << b
+	c := a + b
 
 	fmt.Printf("%T , %T , %T  \n" , a , b , c)
 	fmt.Printf("%d , %d  %d %d \n" , a , b , c , a & b)
