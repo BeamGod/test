@@ -41,6 +41,21 @@ https://blog.csdn.net/u011957758/article/details/81193806 反射
 
 func testSwitch()  {
 
+	i := 1
+	switch i {
+	case 1:
+		fmt.Println("---1")
+		fallthrough
+	case 2:
+		fmt.Println("2")
+	case 3:
+		fmt.Println(3)
+
+
+
+
+	}
+
 	var x interface{}
 	x = "111"
 	x = 1
@@ -50,6 +65,8 @@ func testSwitch()  {
 	print(ok)
 
 
+
+
 	print("\n")
 
 	switch i := (x).(type) {   //switch i := x  报错 不理解（） todo
@@ -57,6 +74,7 @@ func testSwitch()  {
 		fmt.Printf(" x 的类型 :%T",i)
 	case int:
 		fmt.Printf("x 是 int 型")
+
 	case float64:
 		fmt.Printf("x 是 float64 型")
 	case func(int) float64:

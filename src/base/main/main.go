@@ -9,16 +9,16 @@ import (
 
 func main()  {
 	//
-	m := 2
-	k := funcOne(m)
-	l := funcOne(4)
-	fmt.Println("-------------------")
-	fmt.Println(k)
-	fmt.Println(l)
-	fmt.Println("-------------------")
-	fmt.Println(k())
-	fmt.Println(k())
-	fmt.Println(l())
+	//m := 2
+	//k := funcOne(m)
+	//l := funcOne(4)
+	//fmt.Println("-------------------")
+	//fmt.Println(k)
+	//fmt.Println(l)
+	//fmt.Println("-------------------")
+	//fmt.Println(k())
+	//fmt.Println(k())
+	//fmt.Println(l())
 
 	//testPointer()
 
@@ -28,6 +28,7 @@ func main()  {
 	//fmt.Println(b)
 
 	//funcOne()
+	testSwitch()
 
 }
 
