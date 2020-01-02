@@ -2,25 +2,25 @@ package main
 
 import (
 	"fmt"
-	//"test/src/net/client"
+	"test/src/net/server"
 
 	//"test/src/net/server"
 
 	//"net"
 
+	"log"
 	//"net"
 	"net/http"
-	"log"
 	//"../server"
-	"../client"
+	//"../client"
 )
 
 
 
 func main()  {
 	//netTest()
-	//server.StartServer()
-	client.StartClient()
+	server.StartServer()
+	//client.StartClient()
 
 }
 

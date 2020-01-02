@@ -93,6 +93,8 @@ func byteSlice() {
 
 // 不能将byte数组转string,反之亦不行
 func byteArr()  {
+	//data:= [10]byte{}
+	//str := string(data[:])
 	//var c [3]byte
 	//c[0] = 'a'
 	//c[1] = 'b'

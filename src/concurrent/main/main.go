@@ -9,7 +9,7 @@ import (
 func main()  {
 	//fmt.Prin
 	//tln("111")
-	testSelect()
+	testTranslateStruct()
 
 }
 
@@ -157,8 +157,16 @@ func testChannelTwo() {
 			//if i == 5
 			//printB()
 		}
-		close(ch)
+		//close(ch)
 	}()
+
+	go func() {
+		for  {
+			i := 0
+			i++
+		}
+	}()
+
 	//
 	//for true {
 	//	v , ok := <- ch
@@ -193,20 +201,41 @@ func testSelect()  {
 		time.Sleep(time.Second * 1)
 
 		ch1 <- 100
+		close(ch1)
 	}()
 
 	go func() {
 		//time.Sleep(time.Second * 1)
-		//close(ch2)
 		//ch2 <- 200
+		//close(ch2)
 	}()
+
+
 	select {
 	case num := <- ch1:
 		fmt.Println(num)
 	case num , ok:= <- ch2:
 		fmt.Println(num , ok)
+	}
+
+	select {
+	case num := <- ch1:
+		fmt.Println(num)
+	case num , ok:= <- ch2:
+		fmt.Println(num , ok)
+	}
+
+	select {
+	case num := <- ch1:
+		fmt.Println(num)
+	case num , ok:= <- ch2:
+		fmt.Println(num , ok)
+	case <-time.After(3 * time.Second):
+		fmt.Println("111111")
 
 	}
+
+
 
 }
 
@@ -230,4 +259,31 @@ func readOnly( ch <- chan int)  {
 func writeOnly(ch chan <- int )  {
 	ch <- 1
 
+}
+
+type Person struct {
+	Name    string
+	Age     uint8
+	Address Addr
+}
+
+type Addr struct {
+	city     string
+	district string
+}
+
+/*
+测试channel传输复杂的Struct数据
+*/
+func testTranslateStruct() {
+	personChan := make(chan Person, 1)
+
+	person := Person{"xiaoming", 10, Addr{"shenzhen", "longgang"}}
+	personChan <- person
+
+	person.Address = Addr{"guangzhou", "huadu"}
+	fmt.Printf("src person : %+v \n", person)
+
+	newPerson := <-personChan
+	fmt.Printf("new person : %+v \n", newPerson)
 }

@@ -19,6 +19,17 @@ type TestCar interface {
 	Stop()
 }
 
+
+type StrCar string
+
+func (s StrCar) Run(){
+
+}
+func (s StrCar) Stop(){
+
+}
+
+
 type Benz struct {
 	Name string
 }
@@ -85,7 +96,7 @@ func main()  {
 	//du := Person{Name:"du" , Age:18}
 	//toJsonFunc(du)
 	//fmt.Println(du.Age)
-	testSameFunc()
+	testInterface()
 }
 
 
@@ -121,6 +132,7 @@ func printStruct(){
 // 如果要修改结构体内部变量，传递指针 ，因为函数是值传递? 如果接受者类型是*结构体名字，那么传入的取地址，接受者的类型是地址，函数内外该地址对应的所有变量一起联动。
 // 如果接受者类型是结构体名字，那么传入的和接受者的类型都是值，函数内外该变量值不一起联动。
 // 指向指针的指针最终在序列化中能够被处理
+//
 func toJsonFunc(p Person)  {
 
 	fmt.Println(p.Age)
@@ -241,7 +253,6 @@ func testInterface() {
 	//test = BMW{Name:"1"}
 	//test
 
-
 }
 
 // 如果传进来的是未实现的接口实例 类型为nil ，如果是实现的，类型为对应的结构体
@@ -293,9 +304,9 @@ func TestAnonymousStructTwo(){
 	fmt.Println(apple)
 	js , _ := json.Marshal(apple)
 	fmt.Println(string(js))
-	appleTwo := RedApple{}
+	appleTwo := &RedApple{}
 	s := ""
-	json.Unmarshal(js , &appleTwo)
+	json.Unmarshal(js , appleTwo)
 	fmt.Println(appleTwo)
 	json.Unmarshal(js , s)
 	fmt.Println(s)
@@ -354,7 +365,7 @@ func testRewrite() {
 
 // 方法是否可以重写和重载
 
-// 当继承的时候有相同的方法，则呢没解决
+// 当继承的时候有相同的方法
 
 type A struct {
 

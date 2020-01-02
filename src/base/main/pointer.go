@@ -14,7 +14,6 @@ func testPointer() {
 
 }
 
-
 func testPointerOne() {
 
 	a := 10
